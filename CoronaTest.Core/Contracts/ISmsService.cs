@@ -1,6 +1,6 @@
 ﻿namespace CoronaTest.Core.Contracts
 {
-    interface ISmsService
+    public interface ISmsService
     {
         /// <summary>
         /// Sendet eine Sms.

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CoronaTest.Core.Contracts;
+using CoronaTest.Core.Services;
+using Microsoft.Extensions.Configuration;
+using System;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
@@ -8,20 +11,20 @@ namespace CoronaTest.PoC
     {
         static void Main(string[] args)
         {
-            // Find your Account Sid and Token at twilio.com/console
-            // and set the environment variables. See http://twil.io/secure
-            string accountSid = "ACc429331dd873ac94209edd73fcba35f0";
-            string authToken = "7f3727666525169ace3a8c9013dd202d";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Environment.CurrentDirectory)
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<TwilioSmsService>()
+                .AddEnvironmentVariables()
+                .Build();
 
-            TwilioClient.Init(accountSid, authToken);
+            ISmsService smsService = new TwilioSmsService(
+                configuration["Twilio:AccountSid"], configuration["Twilio:AuthToken"]);
 
-            var message = MessageResource.Create(
-                body: "Hello World from Twilio SMS service!",
-                from: new Twilio.Types.PhoneNumber("+14088374921"),
-                to: new Twilio.Types.PhoneNumber("+4367761274365")
-            );
+            string to = "+4367761274365";
+            string message = "Hello World from Twilio SMS service.";
 
-            Console.WriteLine(message.Sid);
+            smsService.SendSms(to, message);
         }
     }
 }

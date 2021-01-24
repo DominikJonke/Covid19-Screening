@@ -1,30 +1,41 @@
 ﻿using CoronaTest.Core.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 
 namespace CoronaTest.Core.Services
 {
-    class TwilioSmsService : ISmsService
+    public class TwilioSmsService : ISmsService
     {
+        private readonly string _accountSid;
+        private readonly string _authToken;
+
+        public TwilioSmsService(string accountSid, string authToken)
+        {
+            _accountSid = accountSid;
+            _authToken = authToken;
+        }
         public bool SendSms(string to, string message)
         {
-            // Find your Account Sid and Token at twilio.com/console
-            // and set the environment variables. See http://twil.io/secure
-            string accountSid = "ACc429331dd873ac94209edd73fcba35f0";
-            string authToken = "7f3727666525169ace3a8c9013dd202d";
+            try
+            {
+                TwilioClient.Init(_accountSid, _authToken);
 
-            TwilioClient.Init(accountSid, authToken);
+                var sms = MessageResource.Create(
+                    body: message,
+                    from: new Twilio.Types.PhoneNumber("+14088374921"),
+                    to: new Twilio.Types.PhoneNumber(to)
+                );
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                
+                return false;
+            }
 
-            var sms = MessageResource.Create(
-                body: "Hello World from Twilio SMS service!",
-                from: new Twilio.Types.PhoneNumber("+14088374921"),
-                to: new Twilio.Types.PhoneNumber("+4367761274365")
-            );
-
-            return sms.Status == MessageResource.StatusEnum.Delivered;
+            return true;
         }
     }
 }
