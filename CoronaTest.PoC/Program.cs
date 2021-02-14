@@ -2,8 +2,6 @@
 using CoronaTest.Core.Services;
 using Microsoft.Extensions.Configuration;
 using System;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace CoronaTest.PoC
 {

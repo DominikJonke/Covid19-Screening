@@ -14,14 +14,14 @@ namespace CoronaTest.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<VerificationToken> GetTokenByIdentifierAsync(Guid identifier)
+            => await _dbContext
+            .VerificationTokens
+            .SingleAsync(verificationToken => verificationToken.Identifier == identifier);
+
         public async Task AddAsync(VerificationToken token)
             => await _dbContext
             .VerificationTokens
             .AddAsync(token);
-
-        public async Task<VerificationToken> GetTokenByIdentifierAsync(Guid identifier)
-            => await _dbContext
-            .VerificationTokens
-            .SingleOrDefaultAsync(verificationToken => verificationToken.Identifier == identifier);
     }
 }

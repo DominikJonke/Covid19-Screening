@@ -9,7 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Core", "CoronaTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Web", "CoronaTest.Web\CoronaTest.Web.csproj", "{8CC66F27-A394-4A29-B433-694886DF8669}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Persistence", "CoronaTest.Persistence\CoronaTest.Persistence.csproj", "{27958CCE-992B-49F0-B3BA-E44B6D08BFF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Persistence", "CoronaTest.Persistence\CoronaTest.Persistence.csproj", "{27958CCE-992B-49F0-B3BA-E44B6D08BFF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.ImportController", "CoronaTest.ImportController\CoronaTest.ImportController.csproj", "{8266034B-51DF-4D3D-B18F-CB922FDFE015}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Utils", "CoronaTest.Utils\CoronaTest.Utils.csproj", "{36034881-FA9B-4A6D-BF66-02FEAE91388B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Wpf", "CoronaTest.Wpf\CoronaTest.Wpf.csproj", "{92A105D6-1272-4DE6-9B2B-14ACFE34FD8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{27958CCE-992B-49F0-B3BA-E44B6D08BFF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27958CCE-992B-49F0-B3BA-E44B6D08BFF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27958CCE-992B-49F0-B3BA-E44B6D08BFF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8266034B-51DF-4D3D-B18F-CB922FDFE015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8266034B-51DF-4D3D-B18F-CB922FDFE015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8266034B-51DF-4D3D-B18F-CB922FDFE015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8266034B-51DF-4D3D-B18F-CB922FDFE015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36034881-FA9B-4A6D-BF66-02FEAE91388B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36034881-FA9B-4A6D-BF66-02FEAE91388B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36034881-FA9B-4A6D-BF66-02FEAE91388B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36034881-FA9B-4A6D-BF66-02FEAE91388B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A105D6-1272-4DE6-9B2B-14ACFE34FD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A105D6-1272-4DE6-9B2B-14ACFE34FD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A105D6-1272-4DE6-9B2B-14ACFE34FD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A105D6-1272-4DE6-9B2B-14ACFE34FD8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

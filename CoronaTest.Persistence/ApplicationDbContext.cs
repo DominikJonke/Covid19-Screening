@@ -1,4 +1,5 @@
-﻿using CoronaTest.Core.Models;
+﻿using CoronaTest.Core.Entities;
+using CoronaTest.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,6 +10,10 @@ namespace CoronaTest.Persistence
     public class ApplicationDbContext : DbContext
     {
         public DbSet<VerificationToken> VerificationTokens { get; set; }
+        public DbSet<Campaign> Campaign { get; set; }
+        public DbSet<TestCenter> TestCenter { get; set; }
+        public DbSet<Participant> Participant { get; set; }
+        public DbSet<Examination> Examination { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder()
