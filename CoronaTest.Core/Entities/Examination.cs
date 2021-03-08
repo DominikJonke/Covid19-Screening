@@ -7,7 +7,7 @@ namespace CoronaTest.Core.Entities
     {
         public Participant Participant { get; set; }
         public ExaminationState State { get; set; }
-        public TestResult Result { get; set; }
+        public TestResult TestResult { get; set; }
         public Campaign Campaign { get; set; }
         public TestCenter TestCenter { get; set; }
 

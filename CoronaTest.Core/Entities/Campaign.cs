@@ -5,7 +5,7 @@ namespace CoronaTest.Core.Entities
 {
     public class Campaign : EntityObject
     {
-        public ICollection<TestCenter> AvailableTestCenter { get; set; }
+        public ICollection<TestCenter> AvailableTestCenters { get; set; }
 
         public DateTime From { get; set; }
         public string Name { get; set; }

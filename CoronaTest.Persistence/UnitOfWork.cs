@@ -12,9 +12,12 @@ namespace CoronaTest.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private bool _disposed;
+
         private readonly ApplicationDbContext _dbContext;
+        private bool _disposed;
+
         public IVerificationTokenRepository VerificationTokens { get; private set; }
+
         public UnitOfWork() : this(new ApplicationDbContext())
         {
         }
@@ -22,23 +25,29 @@ namespace CoronaTest.Persistence
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-
             CampaignRepository = new CampaignRepository(_dbContext);
             TestCenterRepository = new TestCenterRepository(_dbContext);
             ParticipantRepository = new ParticipantRepository(_dbContext);
             ExaminationRepository = new ExaminationRepository(_dbContext);
-            VerificationTokens = new VerificationTokenRepository(_dbContext);
-        }
+            VerificationTokens = new TokenVerificationRepository(_dbContext);
+            UserRepository = new UserRepository(_dbContext);
+            RoleRepository = new RoleRepository(_dbContext);
 
+        }
         public ICampaignRepository CampaignRepository { get; }
         public IExaminationRepository ExaminationRepository { get; }
+
         public ITestCenterRepository TestCenterRepository { get; }
         public IParticipantRepository ParticipantRepository { get; }
+        public IUserRepository UserRepository { get; }
+        public IRoleRepository RoleRepository { get; }
+
 
         public async Task<int> SaveChangesAsync()
         {
             var entities = _dbContext.ChangeTracker.Entries()
-                .Where(entity => entity.State == EntityState.Added || entity.State == EntityState.Modified)
+                .Where(entity => entity.State == EntityState.Added
+                                                    || entity.State == EntityState.Modified)
                 .Select(e => e.Entity);
             foreach (var entity in entities)
             {
@@ -47,18 +56,13 @@ namespace CoronaTest.Persistence
             return await _dbContext.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Validierungen auf Db-Context Ebene
-        /// </summary>
-        /// <param name="entity"></param>
-        public async Task ValidateEntity(object entity)
+        private async Task ValidateEntity(object entity)
         {
             if (entity is Participant participant)
             {
                 if (await _dbContext.Participant.AnyAsync(p => p.Id != participant.Id && p.SocialSecurityNumber == participant.SocialSecurityNumber))
                 {
                     throw new ValidationException($"Eine Person mit der Sozialversicherungsnummer {participant.SocialSecurityNumber} ist bereits registriert.");
-
                 }
             }
         }
@@ -73,7 +77,7 @@ namespace CoronaTest.Persistence
             GC.SuppressFinalize(this);
         }
 
-        public virtual async ValueTask DisposeAsync(bool disposing)
+        protected virtual async ValueTask DisposeAsync(bool disposing)
         {
             if (!_disposed && disposing)
             {

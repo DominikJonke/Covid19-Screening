@@ -6,40 +6,39 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoronaTest.Web.Pages.Participant
 {
-    public class EditParticipantModel : PageModel
-    {
-        private readonly IUnitOfWork _unitOfWork;
-        [BindProperty]
-        public Participant Participant { get; set; }
+        public class EditParticipantsModel : PageModel
+        {
+            private readonly IUnitOfWork _unitOfWork;
+            [BindProperty]
+            public Core.Entities.Participant Participant { get; set; }
 
-        public EditParticipantModel(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-        public async Task<IActionResult> OnGet()
-        {
-            return Page();
-        }
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
+            public EditParticipantsModel(IUnitOfWork unitOfWork)
             {
+                _unitOfWork = unitOfWork;
+            }
+            public async Task<IActionResult> OnGet()
+            {
+
+                // Participant = new Participant();
                 return Page();
             }
-
-            var participantInDb = await _unitOfWork.ParticipantRepository.GetByIdAsync(Participant.Id);
-
-            try
+            public async Task<IActionResult> OnPostAsync()
             {
-                await _unitOfWork.SaveChangesAsync();
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+                var participantInDb = await _unitOfWork.ParticipantRepository.GetByIdAsync(Participant.Id);
+                try
+                {
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", $"{ex.Message}");
+                    return Page();
+                }
+                return RedirectToPage("./Participants/LogIn");
             }
-            catch (ValidationException ex)
-            {
-                ModelState.AddModelError("", $"{ex.Message}");
-                return Page();
-            }
-
-            return RedirectToPage("./Participant/LogIn");
         }
     }
-}

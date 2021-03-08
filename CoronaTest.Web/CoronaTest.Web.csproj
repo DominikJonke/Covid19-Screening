@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controller\CampaignController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,6 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CoronaTest.Core\CoronaTest.Core.csproj" />
     <ProjectReference Include="..\CoronaTest.Persistence\CoronaTest.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Controller\CampaignController.cs" />
   </ItemGroup>
 
 </Project>

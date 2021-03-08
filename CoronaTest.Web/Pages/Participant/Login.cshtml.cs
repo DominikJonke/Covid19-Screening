@@ -16,7 +16,7 @@ namespace CoronaTest.Web.Pages.Participant
             public Examination[] Examinations { get; set; }
 
             [BindProperty]
-            public Participant Participant { get; set; }
+            public Core.Entities.Participant Participant { get; set; }
 
 
             public LogInModel(IUnitOfWork unitOfWork)

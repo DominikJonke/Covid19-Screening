@@ -16,11 +16,11 @@ namespace CoronaTest.Web.Pages.Participant
         }
 
         [BindProperty]
-        public Participant Participant { get; set; }
+        public Core.Entities.Participant Participant { get; set; }
 
         public void OnGet()
         {
-            Participant = new Participant();
+            Participant = new Core.Entities.Participant();
         }
 
         public async Task<IActionResult> OnPost()

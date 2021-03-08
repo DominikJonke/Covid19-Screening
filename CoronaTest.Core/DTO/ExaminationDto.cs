@@ -4,18 +4,20 @@ using System;
 
 namespace CoronaTest.Core.DTO
 {
-    public class ExaminationDto
+    public class ExaminationsDto
     {
         public int Id { get; set; }
+        public string ParticipantFullname { get; set; }
         public TestResult TestResult { get; set; }
-        public string Name { get; set; }
         public DateTime ExaminationAt { get; set; }
-        public ExaminationDto(Examination examination)
+        public string Identifier { get; set; }
+        public ExaminationsDto(Examination examination)
         {
             Id = examination.Id;
-            Name = examination.Participant.Name;
-            TestResult = examination.Result;
+            ParticipantFullname = $"{examination.Participant.FirstName} {examination.Participant.LastName}";
+            TestResult = examination.TestResult;
             ExaminationAt = examination.ExaminationAt;
+            Identifier = examination.Identifier;
         }
     }
 }

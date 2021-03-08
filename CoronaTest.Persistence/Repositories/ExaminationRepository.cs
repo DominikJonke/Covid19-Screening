@@ -26,11 +26,11 @@ namespace CoronaTest.Persistence.Repositories
 
         }
 
-        public async Task<ExaminationDto[]> GetExaminationByDate(DateTime? from, DateTime? to)
+        public async Task<ExaminationsDto[]> GetExaminationByDate(DateTime? from, DateTime? to)
         {
             return await _dbContext.Examination
                .Include(p => p.Participant)
-               .Select(s => new ExaminationDto(s))
+               .Select(s => new ExaminationsDto(s))
                .ToArrayAsync();
         }
     }

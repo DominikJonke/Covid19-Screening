@@ -8,6 +8,6 @@ namespace CoronaTest.Core.Persistence
     public interface IExaminationRepository
     {
         public Task<Examination[]> GetExaminationByParticipant(int id);
-        Task<ExaminationDto[]> GetExaminationByDate(DateTime? from, DateTime? to); 
+        Task<ExaminationsDto[]> GetExaminationByDate(DateTime? from, DateTime? to); 
     }
 }

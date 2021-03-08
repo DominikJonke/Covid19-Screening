@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using CoronaTest.Core.Contracts;
 using CoronaTest.Core.Models;
@@ -26,21 +24,21 @@ namespace CoronaTest.Web.Pages.Security
         {
             _unitOfWork = unitOfWork;
         }
-
-        public IActionResult OnGet(Guid verificationIdentifier)
+        public async Task<IActionResult> OnGet(Guid verificationIdentifier)
         {
             VerificationIdentifier = verificationIdentifier;
 
             return Page();
         }
 
+
         public async Task<IActionResult> OnPostAsync()
         {
             VerificationToken verificationToken = await _unitOfWork.VerificationTokens.GetTokenByIdentifierAsync(VerificationIdentifier);
 
-            if(verificationToken.Token == Token && verificationToken.ValidUntil >= DateTime.Now)
+            if (verificationToken.Token == Token && verificationToken.ValidUntil >= DateTime.Now)
             {
-                return RedirectToPage("/Security/Success", new { verificationIdentifier = verificationToken.Identifier });
+                return RedirectToPage("/Participants/Login", new { verificationIdentifier = verificationToken.Identifier });
             }
             else
             {
